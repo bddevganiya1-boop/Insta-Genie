@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  insta-genie:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: insta-genie-agent
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - PORT=8000
+      - HOST=0.0.0.0
+    volumes:
+      - ./generated_media:/app/generated_media

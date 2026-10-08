@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insta Genie AI Agent - Autonomous Instagram Growth Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <!-- Background Glow Accents -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <div class="app-container">
+    <!-- Navbar -->
+    <header class="navbar glass">
+      <div class="brand">
+        <div class="logo-icon">✨</div>
+        <div class="brand-text">
+          <h1>Insta Genie <span class="badge-ai">AI AGENT</span></h1>
+          <p class="subtitle">Cloudflare Workers AI & Meta Graph API</p>
+        </div>
+      </div>
+
+      <div class="nav-controls">
+        <div id="connection-status" class="status-pill checking">
+          <span class="pulse-dot"></span>
+          <span class="status-label">Checking System...</span>
+        </div>
+
+        <div class="account-card glass-subtle" id="account-card">
+          <img id="account-avatar" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100&q=80" alt="Avatar" class="avatar">
+          <div class="account-meta">
+            <span class="username" id="account-username">@instagenie_demo</span>
+            <span class="followers" id="account-followers">14.2k followers</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Studio Grid -->
+    <main class="studio-grid">
+      
+      <!-- Left Column: Controls & Generation Panel -->
+      <section class="panel glass">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span class="icon">🪄</span>
+            <h2>Generate New Post</h2>
+          </div>
+          <span class="panel-badge">Autonomous</span>
+        </div>
+
+        <form id="generate-form" class="studio-form">
+          <div class="form-group">
+            <label for="topic-input">Post Topic or Core Concept</label>
+            <div class="input-wrapper">
+              <input 
+                type="text" 
+                id="topic-input" 
+                placeholder="e.g., The Rise of Autonomous AI Coding Agents in 2026..." 
+                required
+                autocomplete="off"
+              >
+            </div>
+          </div>
+
+          <!-- Quick Topic Pills -->
+          <div class="topic-suggestions">
+            <span class="suggestion-label">Quick Ideas:</span>
+            <div class="chips-container" id="chips-container">
+              <button type="button" class="chip">🤖 Autonomous AI</button>
+              <button type="button" class="chip">🏙️ Cyberpunk Architecture</button>
+              <button type="button" class="chip">⚡ Mindful Productivity</button>
+              <button type="button" class="chip">🚀 Future of Tech</button>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="tone-select">Content Tone & Style</label>
+              <select id="tone-select">
+                <option value="engaging, visionary & professional">Visionary & Engaging</option>
+                <option value="educational, practical & concise">Educational & Tactical</option>
+                <option value="inspirational, motivational & aesthetic">Inspirational & Aesthetic</option>
+                <option value="storytelling, authentic & casual">Storytelling & Casual</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="model-info">AI Models Active</label>
+              <div class="model-badge">
+                <span class="model-tag">Llama 3.3 70B</span>
+                <span class="model-tag">FLUX.1 Schnell</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button type="button" id="btn-generate-draft" class="btn btn-secondary">
+              <span class="btn-icon">⚡</span>
+              <span>Draft Content & Image</span>
+            </button>
+            <button type="button" id="btn-1click-publish" class="btn btn-primary">
+              <span class="btn-icon">🚀</span>
+              <span>1-Click Auto Post</span>
+            </button>
+          </div>
+        </form>
+
+        <!-- Automation Scheduler Widget -->
+        <div class="scheduler-widget glass-subtle">
+          <div class="scheduler-header">
+            <div class="scheduler-title">
+              <span class="icon">⏰</span>
+              <h3>Autonomous 24/7 Autopilot</h3>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="scheduler-toggle">
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <p class="scheduler-desc">Insta Genie will automatically pick trending concepts, generate custom artwork & post every <strong>6 hours</strong>.</p>
+          <div class="scheduler-meta" id="scheduler-meta">
+            <span>Status: <strong id="sched-status">Inactive</strong></span>
+            <span>Next Run: <strong id="sched-next">--</strong></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Instagram Live Preview & Studio -->
+      <section class="panel glass preview-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span class="icon">📱</span>
+            <h2>Instagram Preview & Inspector</h2>
+          </div>
+          <div class="panel-actions">
+            <button id="btn-copy-caption" class="btn-sm btn-subtle" title="Copy Full Caption">📋 Copy</button>
+            <button id="btn-publish-draft" class="btn-sm btn-accent" style="display: none;">🚀 Publish Now</button>
+          </div>
+        </div>
+
+        <!-- Instagram Mockup Card -->
+        <div class="ig-card glass-subtle" id="ig-card">
+          <!-- IG Header -->
+          <div class="ig-card-header">
+            <div class="ig-user-info">
+              <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100&q=80" alt="Avatar" class="avatar-sm" id="ig-preview-avatar">
+              <div class="ig-user-text">
+                <span class="ig-handle" id="ig-preview-handle">instagenie_demo</span>
+                <span class="ig-location">Generated with Cloudflare Workers AI</span>
+              </div>
+            </div>
+            <div class="ig-options">•••</div>
+          </div>
+
+          <!-- IG Image Preview -->
+          <div class="ig-image-wrapper">
+            <div class="image-loader" id="image-loader" style="display: none;">
+              <div class="spinner"></div>
+              <p>Generating 8K AI Image with FLUX.1...</p>
+            </div>
+            <img 
+              id="ig-post-image" 
+              src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1080&q=80" 
+              alt="Generated Post Artwork"
+            >
+          </div>
+
+          <!-- IG Action Bar -->
+          <div class="ig-action-bar">
+            <div class="ig-left-actions">
+              <span class="ig-icon">❤️</span>
+              <span class="ig-icon">💬</span>
+              <span class="ig-icon">✈️</span>
+            </div>
+            <span class="ig-icon">🔖</span>
+          </div>
+
+          <!-- IG Content & Caption -->
+          <div class="ig-body-section">
+            <div class="ig-likes"><strong>1,248 likes</strong></div>
+            <div class="ig-caption-container">
+              <strong id="ig-caption-handle">instagenie_demo</strong>
+              <span id="ig-caption-hook" class="ig-hook">✨ Welcome to Insta Genie Agent</span>
+              <p id="ig-caption-body" class="ig-text">
+                Your high-converting AI Instagram manager is ready. Click "Draft Content & Image" or "1-Click Auto Post" to let Workers AI and Meta Graph API craft and publish your next viral masterpiece.
+              </p>
+            </div>
+
+            <!-- Hashtags Tags Container -->
+            <div class="ig-hashtags" id="ig-hashtags">
+              <span class="tag">#InstaGenie</span>
+              <span class="tag">#AIautomation</span>
+              <span class="tag">#MetaGraphAPI</span>
+              <span class="tag">#WorkersAI</span>
+            </div>
+
+            <div class="ig-timestamp">JUST NOW • AUTOMATION AGENT</div>
+          </div>
+        </div>
+
+        <!-- Success Publication Banner (Hidden by default) -->
+        <div id="publication-banner" class="publication-banner" style="display: none;">
+          <div class="banner-icon">🎉</div>
+          <div class="banner-content">
+            <h4>Successfully Published to Instagram!</h4>
+            <p>Post ID: <span id="pub-id">--</span></p>
+            <a id="pub-link" href="#" target="_blank" class="banner-link">View Live on Instagram ↗</a>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Activity & Real-Time Console -->
+    <section class="activity-section glass">
+      <div class="console-header">
+        <div class="panel-title">
+          <span class="icon">📟</span>
+          <h3>Agent Execution Telemetry</h3>
+        </div>
+        <button id="btn-clear-logs" class="btn-sm btn-subtle">Clear Logs</button>
+      </div>
+      <div class="terminal-logs" id="terminal-logs">
+        <div class="log-line info">[00:00:00] [SYSTEM] Insta Genie Engine initialized in DRY_RUN safe mode.</div>
+        <div class="log-line success">[00:00:00] [WORKERS_AI] Text Model (@cf/meta/llama-3.3-70b-instruct-fp8-fast) online.</div>
+        <div class="log-line success">[00:00:00] [WORKERS_AI] Image Model (@cf/black-forest-labs/flux-1-schnell) ready.</div>
+        <div class="log-line info">[00:00:00] [GRAPH_API] Meta Instagram Graph API v20.0 ready.</div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Insta Genie Agent • Built with FastAPI, Node.js, Meta Graph API & Cloudflare Workers AI • Open Source</p>
+    </footer>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

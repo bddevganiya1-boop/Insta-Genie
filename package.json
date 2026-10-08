@@ -1,0 +1,28 @@
+{
+  "name": "insta-genie",
+  "version": "1.0.0",
+  "description": "Autonomous AI Instagram Content & Publishing Engine powered by Meta Graph API and Cloudflare Workers AI",
+  "main": "node_worker/dist/index.js",
+  "scripts": {
+    "start": "python -m python_service.main --serve",
+    "dev:python": "uvicorn python_service.web.app:app --reload --port 8000",
+    "dev:worker": "cd node_worker && wrangler dev",
+    "deploy:worker": "cd node_worker && wrangler deploy",
+    "test:python": "pytest python_service/tests -v",
+    "lint": "ruff check python_service/"
+  },
+  "keywords": [
+    "instagram",
+    "meta-graph-api",
+    "cloudflare-workers-ai",
+    "ai-agent",
+    "llama3",
+    "flux",
+    "automation",
+    "python",
+    "nodejs",
+    "fastapi"
+  ],
+  "author": "Insta Genie Contributors",
+  "license": "MIT"
+}

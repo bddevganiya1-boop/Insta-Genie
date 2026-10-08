@@ -1,0 +1,24 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "insta-genie-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2024-05-12",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Cloudflare Workers AI native edge binding
+  "ai": {
+    "binding": "AI"
+  },
+
+  // Automation Cron: Run autonomous Instagram posting every 6 hours
+  "triggers": {
+    "crons": ["0 */6 * * *"]
+  },
+
+  // Environment variable fallbacks for local dev
+  "vars": {
+    "ENVIRONMENT": "production",
+    "DRY_RUN": "false",
+    "META_GRAPH_API_VERSION": "v20.0"
+  }
+}

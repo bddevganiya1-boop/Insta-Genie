@@ -1,0 +1,29 @@
+{
+  "name": "insta-genie-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker & Node.js service for Insta Genie Instagram Automation",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "keywords": [
+    "instagram-automation",
+    "meta-graph-api",
+    "cloudflare-workers-ai",
+    "llama3",
+    "flux"
+  ],
+  "author": "Insta Genie Contributors",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240512.0",
+    "typescript": "^5.4.5",
+    "wrangler": "^3.57.1"
+  }
+}
